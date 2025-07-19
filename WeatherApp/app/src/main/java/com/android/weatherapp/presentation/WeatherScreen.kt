@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun WeatherScreen() {
+fun WeatherScreen(weatherViewModel: WeatherViewModel) {
 
     var city by remember {
         mutableStateOf("")
@@ -52,7 +52,7 @@ fun WeatherScreen() {
            )
            //Text Field ends
            IconButton(onClick = {
-
+                weatherViewModel.getData(city)
            }) {
                Icon(imageVector = Icons.Default.Search, contentDescription = "Search for Any location")
            }
