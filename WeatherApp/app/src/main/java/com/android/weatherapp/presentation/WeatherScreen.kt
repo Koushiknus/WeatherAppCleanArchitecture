@@ -20,6 +20,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import com.android.weatherapp.domain.api.NetworkResponse
 
@@ -31,6 +32,8 @@ fun WeatherScreen(weatherViewModel: WeatherViewModel) {
     }
 
     val weatherResult = weatherViewModel.weatherResult.observeAsState()
+
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     Column(
         modifier = Modifier
@@ -62,6 +65,7 @@ fun WeatherScreen(weatherViewModel: WeatherViewModel) {
            //Text Field ends
            IconButton(onClick = {
                 weatherViewModel.getData(city)
+               keyboardController?.hide()
            }) {
                Icon(imageVector = Icons.Default.Search, contentDescription = "Search for Any location")
            }
@@ -75,7 +79,7 @@ fun WeatherScreen(weatherViewModel: WeatherViewModel) {
                 CircularProgressIndicator()
             }
             is NetworkResponse.Success -> {
-                Text(text = result.data.toString())
+                WeatherDetails(result.data)
             }
             null -> {
 
@@ -83,3 +87,4 @@ fun WeatherScreen(weatherViewModel: WeatherViewModel) {
         }
     }
 }
+
