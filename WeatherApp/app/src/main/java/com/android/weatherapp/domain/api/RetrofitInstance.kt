@@ -12,4 +12,5 @@ object RetrofitInstance {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+    val weatherApi = getInstance().create(WeatherAPI::class.java)
 }

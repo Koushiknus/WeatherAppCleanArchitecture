@@ -27,6 +27,8 @@ fun WeatherScreen(weatherViewModel: WeatherViewModel) {
         mutableStateOf("")
     }
 
+    val weatherResult = weatherViewModel.weatherResult.obs
+
     Column(
         modifier = Modifier.fillMaxWidth().padding(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
